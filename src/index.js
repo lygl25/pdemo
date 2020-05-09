@@ -4,8 +4,8 @@ import Phaser from "phaser";
 const config = {
   type: Phaser.AUTO,
   parent: "phaser-example",
-  width: 800,
-  height: 600,
+  width: 1366,
+  height: 768,
   scene: {
     preload: preload,
     create: create,
