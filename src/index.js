@@ -2,6 +2,7 @@ import Phaser from "phaser";
 
 
 const config = {
+  title:"我的Phaser3演示代码",
   type: Phaser.AUTO,
   parent: "phaser-example",
   width: 1366,
@@ -12,7 +13,7 @@ const config = {
     update:update
   }
 };
-
+  
 const game = new Phaser.Game(config);
 
 function preload() {
