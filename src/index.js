@@ -2,7 +2,7 @@ import Phaser from "phaser";
 
 
 const config = {
-  title:"我的Phaser3演示代码",
+  title:"我的Phaser3演示代码x",
   type: Phaser.AUTO,
   parent: "phaser-example",
   width: 1366,
