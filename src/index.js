@@ -17,12 +17,12 @@ const config = {
 const game = new Phaser.Game(config);
 
 function preload() {
-
+  this.load.image('sky', 'assets/images/TempleHallForest.jpg');
 }
 
 
 function create() {
-
+  this.add.image(683, 384,'sky');
 }
 
 function update(){
