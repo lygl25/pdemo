@@ -1,4 +1,10 @@
 import Phaser from "phaser"
+import ImgStart from "./assets/images/TempleHallForest.jpg"
+import ImgGround from  './assets/images/platform.png'
+import ImgStar from  './assets/images/star.png'
+import ImgBomb from  './assets/images/bomb.png'
+import ImgDude from  './assets/images/dude.png'
+
 
 
 const config = {
@@ -34,11 +40,14 @@ var   bombs//炸弹
 var   gameOver = false
 
 function preload() {
-  this.load.image('start', 'assets/images/TempleHallForest.jpg')//背景图
-  this.load.image('ground', 'assets/images/platform.png')//平台图
-  this.load.image('star', 'assets/images/star.png')//星星
-  this.load.image('bomb', 'assets/images/bomb.png')//炸弹
-  this.load.spritesheet('dude', 'assets/images/dude.png', { frameWidth: 32, frameHeight: 48 })//精灵表方式载入精灵图片
+  console.log("读取资源开始")
+  console.log(ImgStart)
+  this.load.image('start', ImgStart)//背景图
+  this.load.image('ground', ImgGround)//平台图
+  this.load.image('star', ImgStar)//星星
+  this.load.image('bomb', ImgBomb)//炸弹
+  this.load.spritesheet('dude', ImgDude, { frameWidth: 32, frameHeight: 48 })//精灵表方式载入精灵图片
+  console.log("读取资源结束")
 }
 
 

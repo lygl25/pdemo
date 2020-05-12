@@ -21,8 +21,14 @@ module.exports = {
       },
       {
         test: /\.(gif|png|jpe?g|svg|xml)$/i,
-        use: "file-loader"
+        use: [{
+             loader:"file-loader",
+             options:{
+                name:"./img/[hash].[ext]"
+              }
+        }]
       }
+
     ]
   },
   plugins: [
