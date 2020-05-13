@@ -7,6 +7,7 @@ import ImgDude from  './assets/images/dude.png'
 
 
 
+
 const config = {
   title:"我的Phaser3演示代码x",
   type: Phaser.AUTO,
@@ -26,7 +27,16 @@ const config = {
     preload: preload,
     create: create,
     update:update
-  }
+  },
+  //游戏画面显示比例设置
+  scale: {
+    mode: Phaser.Scale.FIT,//自动缩放游戏画面
+    autoCenter: Phaser.Scale.CENTER_BOTH//游戏画面居中显示
+
+},
+audio: {
+  disableWebAudio: true
+}
 }
   
 const game = new Phaser.Game(config)
@@ -38,6 +48,7 @@ var   score=0   //分数
 var   scoreText //分数名称
 var   bombs//炸弹
 var   gameOver = false
+var   playsound
 
 function preload() {
   console.log("读取资源开始")
@@ -47,7 +58,12 @@ function preload() {
   this.load.image('star', ImgStar)//星星
   this.load.image('bomb', ImgBomb)//炸弹
   this.load.spritesheet('dude', ImgDude, { frameWidth: 32, frameHeight: 48 })//精灵表方式载入精灵图片
+  var x1
+  x1=this.load.audio('diamond', ['./src/assets/audio/Diamond.mp3']);//吃掉星星的音效
+
+  console.log(x1)
   console.log("读取资源结束")
+  
 }
 
 
@@ -61,7 +77,8 @@ function create() {
 
      
       player = this.physics.add.sprite(100, 150, 'dude')//创建一个精灵
-      
+     playsound = this.sound.add('diamond');//创建吃星星的声音
+   
       player.body.setGravityY(300)
       player.setBounce(0.2)//精灵的弹力值
       player.setCollideWorldBounds(true)
@@ -154,6 +171,8 @@ function collectStar (player, star)
     star.disableBody(true, true);//角色碰撞星星后 星星为不活动、隐形状态
     score +=10 //吃掉一个星星加10分
     scoreText.setText("Score:"+score)
+   playsound.play()//播放吃掉星星的声音
+    
     //没有星星后投放炸弹
     if (stars.countActive(true) === 0)
     {
