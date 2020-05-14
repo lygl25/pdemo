@@ -273,8 +273,10 @@ function collectStar (player, star)
 //精灵和炸弹碰撞后的处理
 function hitBomb (player, bomb)
 {
-    this.physics.pause()//游戏停止
+    
     audioDeath.play()//播放精灵碰撞炸弹死亡的声音
+    this.physics.pause()//游戏停止
+   
     player.setTint(0xff0000) //精灵变为红色
 
     player.anims.play('turn');
