@@ -5,6 +5,8 @@ import ImgStar from  './assets/images/star.png'
 import ImgBomb from  './assets/images/bomb.png'
 import ImgDude from  './assets/images/dude.png'
 
+
+console.log(Phaser);
 // 使用 Web Audio API 
 var audioContext;
 try {
@@ -66,9 +68,9 @@ function preload() {
   this.load.image('star', ImgStar)//星星
   this.load.image('bomb', ImgBomb)//炸弹
   this.load.spritesheet('dude', ImgDude, { frameWidth: 32, frameHeight: 48 })//精灵表方式载入精灵图片
-  this.load.audio('audioDiamond', ['./static/Diamond.mp3']);//载入精灵碰撞星星的声音
-  this.load.audio('audioJump', ['./static/Jump.mp3']);//载入跳跃声音
-  this.load.audio('audioDeath', ['./static/Death.mp3']);//载入精灵碰撞炸弹死亡声音
+  this.load.audio('audioDiamond', ['static/Diamond.mp3']);//载入精灵碰撞星星的声音
+  this.load.audio('audioJump', ['static/Jump.mp3']);//载入跳跃声音
+  this.load.audio('audioDeath', ['static/Death.mp3']);//载入精灵碰撞炸弹死亡声音
   console.log("读取资源结束")
   
 }
@@ -223,3 +225,49 @@ function ariseBomb(){
   bomb.allowGravity = false;
 
 }
+
+
+
+// var SceneA = new Phaser.Class({
+
+//   Extends: Phaser.Scene,
+
+//   initialize:
+
+//   function SceneA ()
+//   {
+//       Phaser.Scene.call(this, { key: 'sceneA' });
+
+//       this.face;
+//   },
+
+//   preload: function ()
+//   {
+//       this.load.image('face', 'assets/pics/bw-face.png');
+//   },
+
+//   create: function ()
+//   {
+//       this.face = this.add.image(0, 0, 'face').setOrigin(0);
+
+//       this.input.once('pointerdown', function () {
+
+//           this.scene.transition({
+//               target: 'sceneB',
+//               duration: 2000,
+//               moveBelow: true,
+//               onUpdate: this.transitionOut,
+//               data: { x: 400, y: 300 }
+//           });
+
+//       }, this);
+//   },
+
+//   transitionOut: function (progress)
+//   {
+//       this.face.y = (600 * progress);
+//   }
+
+// });
+
+
