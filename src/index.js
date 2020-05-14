@@ -55,6 +55,8 @@ var   scoreText //分数名称
 var   bombs     //炸弹
 var   gameOver = false
 var   audioDiamond//精灵碰撞星星的声音
+var   audioJump//精灵跳跃声音
+var   audioDeath//精灵碰撞炸弹死亡声音
 
 function preload() {
   console.log("读取资源开始")
@@ -65,6 +67,8 @@ function preload() {
   this.load.image('bomb', ImgBomb)//炸弹
   this.load.spritesheet('dude', ImgDude, { frameWidth: 32, frameHeight: 48 })//精灵表方式载入精灵图片
   this.load.audio('audioDiamond', ['./static/Diamond.mp3']);//载入精灵碰撞星星的声音
+  this.load.audio('audioJump', ['./static/Jump.mp3']);//载入跳跃声音
+  this.load.audio('audioDeath', ['./static/Death.mp3']);//载入精灵碰撞炸弹死亡声音
   console.log("读取资源结束")
   
 }
@@ -80,7 +84,11 @@ function create() {
 
      
       player = this.physics.add.sprite(100, 150, 'dude')//创建一个精灵
+      
       audioDiamond = this.sound.add('audioDiamond', {volume: 0.5});//创建精灵碰撞星星声音
+      audioJump = this.sound.add('audioJump', {volume: 0.5});//创建精灵碰撞星星声音
+      audioDeath = this.sound.add('audioDeath', {volume: 0.5});//创建精灵碰撞星星声音
+      
       player.body.setGravityY(300)
       player.setBounce(0.2)//精灵的弹力值
       player.setCollideWorldBounds(true)
@@ -161,6 +169,7 @@ function update(){
       if (cursors.up.isDown && player.body.touching.down)
       {//跳跃
           player.setVelocityY(-430)
+          audioJump.play()//播放跳跃声音
       }
 
 }
@@ -196,7 +205,7 @@ function collectStar (player, star)
 function hitBomb (player, bomb)
 {
     this.physics.pause()//游戏停止
-
+    audioDeath.play()//播放精灵碰撞炸弹死亡的声音
     player.setTint(0xff0000) //精灵变为红色
 
     player.anims.play('turn');
