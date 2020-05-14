@@ -5,8 +5,13 @@ import ImgStar from  './assets/images/star.png'
 import ImgBomb from  './assets/images/bomb.png'
 import ImgDude from  './assets/images/dude.png'
 
-
-
+// 使用 Web Audio API 
+var audioContext;
+try {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+} catch (e) {
+    console.error(e);
+}
 
 const config = {
   title:"我的Phaser3演示代码x",
@@ -34,8 +39,9 @@ const config = {
     autoCenter: Phaser.Scale.CENTER_BOTH//游戏画面居中显示
 
 },
+//声音配置
 audio: {
-  disableWebAudio: true
+ context: audioContext
 }
 }
   
@@ -46,9 +52,9 @@ var   cursors   //控制
 var   stars     //星星
 var   score=0   //分数
 var   scoreText //分数名称
-var   bombs//炸弹
+var   bombs     //炸弹
 var   gameOver = false
-var   playsound
+var   audioDiamond//精灵碰撞星星的声音
 
 function preload() {
   console.log("读取资源开始")
@@ -58,10 +64,7 @@ function preload() {
   this.load.image('star', ImgStar)//星星
   this.load.image('bomb', ImgBomb)//炸弹
   this.load.spritesheet('dude', ImgDude, { frameWidth: 32, frameHeight: 48 })//精灵表方式载入精灵图片
-  var x1
-  x1=this.load.audio('diamond', ['./src/assets/audio/Diamond.mp3']);//吃掉星星的音效
-
-  console.log(x1)
+  this.load.audio('audioDiamond', ['./static/Diamond.mp3']);//载入精灵碰撞星星的声音
   console.log("读取资源结束")
   
 }
@@ -77,8 +80,7 @@ function create() {
 
      
       player = this.physics.add.sprite(100, 150, 'dude')//创建一个精灵
-     playsound = this.sound.add('diamond');//创建吃星星的声音
-   
+      audioDiamond = this.sound.add('audioDiamond', {volume: 0.5});//创建精灵碰撞星星声音
       player.body.setGravityY(300)
       player.setBounce(0.2)//精灵的弹力值
       player.setCollideWorldBounds(true)
@@ -171,7 +173,7 @@ function collectStar (player, star)
     star.disableBody(true, true);//角色碰撞星星后 星星为不活动、隐形状态
     score +=10 //吃掉一个星星加10分
     scoreText.setText("Score:"+score)
-   playsound.play()//播放吃掉星星的声音
+    audioDiamond.play()//播放精灵碰撞星星的声音
     
     //没有星星后投放炸弹
     if (stars.countActive(true) === 0)
