@@ -1,10 +1,13 @@
 
-import ImgBackground from "./assets/images/TempleHallForest.jpg";
-import ImgGround from "./assets/images/platform.png";
-import ImgStar from "./assets/images/star.png";
-import ImgBomb from "./assets/images/bomb.png";
-import ImgDude from "./assets/images/dude.png";
-import ImgGameOver from "./assets/images/ayu.png";
+import ImgBackground from "./assets/images/TempleHallForest.jpg"
+import ImgGround from "./assets/images/platform.png"
+import ImgBeam from "./assets/images/Beam.png"
+import ImgStar from "./assets/images/star.png"
+import ImgBomb from "./assets/images/bomb.png"
+import ImgDude from "./assets/images/dude.png"
+import ImgGameOver from "./assets/images/ayu.png"
+import FontCommonPng from "./assets/fonts/font.png"
+import FontCommonXml from "./assets/fonts/font.xml"
 //预加载游戏资源
 var Preloader = new Phaser.Class({
 
@@ -19,14 +22,28 @@ var Preloader = new Phaser.Class({
 
     preload: function ()
     {
+       
+        var progress = this.add.graphics();
+
+        this.load.on('progress', function (value) {
+            console.log(value)
+            progress.clear();
+            progress.fillStyle(0xffffff, 1);
+            progress.fillRect(0, 384, 1366 * value, 60);
+    
+        });
+    
+        this.load.on('complete', function () {
+    
+            progress.destroy();
+    
+        });
+       
+       
         console.log("读取资源开始");
-        this.load.bitmapFont(
-          "desyrel",
-          "src/assets/fonts/font.png",
-          "src/assets/fonts/font.xml"
-        ); //加载字体
-         //资源加载要单独出来
+        this.load.bitmapFont("desyrel",FontCommonPng,FontCommonXml); //加载字体
         this.load.image("background", ImgBackground); //背景图
+        this.load.image("ImgBeam", ImgBeam); //菜单界面的光束
         this.load.image("ImgGameOver", ImgGameOver); //游戏结束图片
         this.load.image("ground", ImgGround); //平台图
         this.load.image("star", ImgStar); //星星

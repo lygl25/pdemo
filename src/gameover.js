@@ -23,8 +23,6 @@ var GameOver = new Phaser.Class({
      
         this.input.once('pointerup', function (event) {
             console.log('GameOver');
-            console.log(this);
-         
             this.scene.start('mainmenu')
           
         }, this);

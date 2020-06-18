@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import gc from "./gameconfig"
 
 var audioJump; //精灵跳跃声音
 var audioDiamond; //精灵碰撞星星的声音
@@ -24,13 +24,14 @@ var Game = new Phaser.Class({
     preload: function () {},
   
     create: function () {
-      this.input.setDefaultCursor('url(src/assets/images/SC2-cursor.cur), pointer')//默认鼠标指针
-      this.add.image(683, 384, "background"); //背景图
+   
+      this.input.setDefaultCursor(gc.cursorDef)//默认鼠标指针
+      this.add.image(gc.width/2,gc.height/2, "background"); //背景图
       platforms = this.physics.add.staticGroup(); //创建静态物体组件，这里是地面和平台，staticGroup静体组
-      platforms.create(683, 717.76, "ground").setScale(3.415).refreshBody(); //地面
-      platforms.create(600, 550, "ground");
-      platforms.create(200, 450, "ground");
-      platforms.create(966, 350, "ground").setScale(2, 1).refreshBody(); //最上面的平台
+      platforms.create(gc.width/2, gc.height*0.9345833, "ground").setScale(3.415).refreshBody(); //地面
+      platforms.create(gc.width*0.43923, gc.height*0.7161, "ground");//中间平台下
+      platforms.create(gc.width*0.1464,gc.height*0.58, "ground");//中间平台下
+      platforms.create(gc.width*0.7071,gc.height*0.4 , "ground").setScale(2, 1).refreshBody(); //最上面的平台
       this.data.set('score', 0);
       player = this.physics.add.sprite(100, 150, "dude"); //创建一个精灵
   
