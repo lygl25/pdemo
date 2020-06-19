@@ -7,6 +7,7 @@ import {MainMenu} from "./mainmenu"   //游戏开始菜单场景
 import {GameOver} from "./gameover"   //游戏结束菜单场景
 import jumpergame from "./Scenes/Game"   //无限跳跃游戏场景
 import jumperGameOver from './Scenes/GameOver' //无限跳跃游戏结束
+import {play} from './pixelgames/play' //像素游戏
 
 
 console.dir(Phaser)
@@ -29,15 +30,16 @@ const config = {
     //设置街机物理模式
     default: "arcade",
     arcade: {
-      gravity: { y: 200 },//引力
+      gravity: { y: 0 },//引力
       debug: true,
     },
   },
-  scene: [Preloader,MainMenu, Game,GameOver,jumpergame,jumperGameOver],
+  scene: [play,Preloader,MainMenu, Game,GameOver,jumpergame,jumperGameOver],
   //游戏画面显示比例设置
   scale: {
-  //  mode: Phaser.Scale.FIT, //自动缩放游戏画面
+    mode: Phaser.Scale.FIT, //自动缩放游戏画面
     autoCenter: Phaser.Scale.CENTER_BOTH, //游戏画面居中显示
+
   },
   //声音配置
   audio: {

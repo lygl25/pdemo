@@ -68,7 +68,7 @@ var Game = new Phaser.Class({
       stars = this.physics.add.group({
         key: "star",
         repeat: 11, //星星数量，会自动创建一个 后重复11次创建，总共会创建12个星星
-        setXY: { x: 12, y: 0, stepX: 70 },
+        setXY: { x: 12, y: 0, stepX: 50 },
       });
   
       //炸弹
