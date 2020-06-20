@@ -48,7 +48,7 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
-    
+
     this.add.image(240, 320, "backgroundj")
       .setScrollFactor(1, 0)//通过将y滚动因子设置为0，我们可以保持背景不随相机上下滚动。 
     //创建一个有物理树形平台组

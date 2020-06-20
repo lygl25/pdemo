@@ -30,7 +30,7 @@ const config = {
     //设置街机物理模式
     default: "arcade",
     arcade: {
-      gravity: { y: 0 },//引力
+      gravity: { y: 300 },//引力
       debug: true,
     },
   },
